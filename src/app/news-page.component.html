@@ -1,0 +1,118 @@
+<app-site-header activeSection="news"></app-site-header>
+
+@if (selectedNews; as article) {
+  <main class="news-page detail-page">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Fil d’Ariane">
+        <a routerLink="/">Accueil</a><span aria-hidden="true">/</span><a routerLink="/actualites">Actualités &amp; événements</a><span aria-hidden="true">/</span><span aria-current="page">{{ article.title }}</span>
+      </nav>
+      <article class="detail-content">
+        <p class="eyebrow"><span class="eyebrow-line"></span>{{ article.category }}</p>
+        <span class="concept-note">Contenu conceptuel</span>
+        <h1>{{ article.title }}</h1>
+        <p class="detail-meta">{{ article.dateLabel }}</p>
+        <p class="detail-description">{{ article.description }}</p>
+        <div class="placeholder-note"><strong>Aperçu éditorial</strong><p>Cette page illustre la présentation d’une actualité dans le futur site MEDISAFE 2. Son contenu est fictif et présenté à titre de démonstration.</p></div>
+        <a class="text-link" routerLink="/actualites"><span aria-hidden="true">←</span> Toutes les actualités</a>
+      </article>
+    </div>
+  </main>
+} @else if (selectedEvent; as event) {
+  <main class="news-page detail-page">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Fil d’Ariane">
+        <a routerLink="/">Accueil</a><span aria-hidden="true">/</span><a routerLink="/actualites">Actualités &amp; événements</a><span aria-hidden="true">/</span><span aria-current="page">Agenda</span>
+      </nav>
+      <article class="detail-content">
+        <p class="eyebrow"><span class="eyebrow-line"></span>{{ event.type }}</p>
+        <span class="concept-note">Événement conceptuel · {{ event.dateLabel }}</span>
+        <h1>{{ event.title }}</h1>
+        <p class="detail-meta">{{ event.location }}</p>
+        <p class="detail-description">{{ event.description }}</p>
+        <div class="placeholder-note"><strong>Agenda de démonstration</strong><p>Les informations affichées sont conceptuelles. Aucun événement ni date n’est confirmé.</p></div>
+        <a class="text-link" routerLink="/actualites"><span aria-hidden="true">←</span> Retour à l’agenda</a>
+      </article>
+    </div>
+  </main>
+} @else if (isUnknownItem) {
+  <main class="news-page detail-page">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Fil d’Ariane"><a routerLink="/">Accueil</a><span aria-hidden="true">/</span><a routerLink="/actualites">Actualités &amp; événements</a><span aria-hidden="true">/</span><span aria-current="page">Contenu</span></nav>
+      <article class="detail-content"><p class="eyebrow"><span class="eyebrow-line"></span>Suivre le projet</p><h1>Ce contenu n’est pas disponible</h1><p class="detail-description">Le lien demandé ne correspond à aucun contenu de démonstration.</p><a class="text-link" routerLink="/actualites"><span aria-hidden="true">←</span> Retour aux actualités</a></article>
+    </div>
+  </main>
+} @else {
+  <main class="news-page">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Fil d’Ariane"><a routerLink="/">Accueil</a><span aria-hidden="true">/</span><span aria-current="page">Actualités &amp; événements</span></nav>
+
+      <section class="page-intro" aria-labelledby="news-title">
+        <p class="eyebrow"><span class="eyebrow-line"></span>Suivre le projet</p>
+        <h1 id="news-title">Actualités <span>&amp; événements</span></h1>
+        <p>Suivez les actualités, les activités et les événements du projet MEDISAFE 2.</p>
+      </section>
+
+      <section class="featured" aria-labelledby="featured-title">
+        <div class="featured-image-wrap">
+          <img src="/assets/medisafe-hero.png" alt="Environnement professionnel lié à la santé et à la sécurité des médicaments" class="featured-image">
+          <span class="image-caption">Visuel de concept</span>
+        </div>
+        <article class="featured-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span>Actualité</p>
+          <span class="concept-note">Contenu conceptuel</span>
+          <h2 id="featured-title">{{ featuredNews.title }}</h2>
+          <p class="featured-description">{{ featuredNews.description }}</p>
+          <a class="text-link" [routerLink]="['/actualites', featuredNews.id]">Lire l’actualité <span aria-hidden="true">→</span></a>
+        </article>
+      </section>
+
+      <section class="news-section" aria-labelledby="latest-title">
+        <div class="section-heading">
+          <div><p class="eyebrow"><span class="eyebrow-line"></span>Actualités</p><h2 id="latest-title">Les dernières actualités</h2></div>
+          <p class="section-note">Exemples éditoriaux conceptuels</p>
+        </div>
+        <div class="news-grid">
+          @for (article of newsItems; track article.id) {
+            <a class="news-item" [routerLink]="['/actualites', article.id]" [attr.aria-label]="'Lire l’actualité : ' + article.title">
+              <div class="item-meta"><span>{{ article.category }}</span><span>{{ article.dateLabel }}</span></div>
+              <h3>{{ article.title }}</h3>
+              <p>{{ article.description }}</p>
+              <span class="text-link">Lire l’actualité <span aria-hidden="true">→</span></span>
+            </a>
+          }
+        </div>
+        <p class="content-note">Les contenus et dates présentés sont fictifs et servent uniquement à illustrer le concept.</p>
+      </section>
+    </div>
+
+    <section class="events-band" aria-labelledby="events-title">
+      <div class="container">
+        <div class="section-heading">
+          <div><p class="eyebrow"><span class="eyebrow-line"></span>Agenda</p><h2 id="events-title">Prochains événements</h2></div>
+          <p class="section-note">Rendez-vous conceptuels · dates à venir</p>
+        </div>
+        <div class="events-grid">
+          @for (event of eventItems; track event.id) {
+            <a class="event-item" [routerLink]="['/actualites/evenements', event.id]" [attr.aria-label]="'Découvrir l’événement : ' + event.title">
+              <div class="event-meta"><span class="event-date">{{ event.dateLabel }}</span><span>{{ event.type }}</span></div>
+              <h3>{{ event.title }}</h3>
+              <p class="event-location">{{ event.location }}</p>
+              <p class="event-description">{{ event.description }}</p>
+              <span class="text-link">Découvrir l’événement <span aria-hidden="true">→</span></span>
+            </a>
+          }
+        </div>
+        <p class="content-note">Agenda de démonstration : aucun événement n’est confirmé.</p>
+      </div>
+    </section>
+
+    <section class="closing-cta" aria-labelledby="closing-title">
+      <div class="container closing-inner">
+        <div><p class="eyebrow"><span class="eyebrow-line"></span>MEDISAFE 2</p><h2 id="closing-title">Rester informé sur le projet</h2><p>Retrouvez régulièrement les actualités, ressources et événements liés à MEDISAFE 2.</p></div>
+        <a class="cta-link" routerLink="/ressources">Explorer les ressources <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  </main>
+}
+
+<app-site-footer></app-site-footer>

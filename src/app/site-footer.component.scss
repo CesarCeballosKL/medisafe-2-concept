@@ -1,0 +1,32 @@
+:host { display: block; }
+.container { width: min(1200px, calc(100% - 96px)); margin-inline: auto; }
+.site-footer { padding: 50px 0 20px; background: #102d49; color: #fff; }
+a { color: inherit; text-decoration: none; }
+.footer-main { display: grid; grid-template-columns: 1fr .9fr 1.25fr; gap: 35px; align-items: start; padding-bottom: 43px; }
+.brand { display: inline-flex; gap: 11px; align-items: center; color: #fff; }
+.brand-mark { width: 30px; height: 29px; position: relative; display: flex; align-items: flex-end; gap: 3px; border-left: 1.5px solid #c5a46b; border-bottom: 1.5px solid #c5a46b; padding: 0 0 3px 4px; }
+.brand-mark i { display: block; width: 5px; background: #c5a46b; opacity: .9; }.brand-mark i:nth-child(1) { height: 10px; }.brand-mark i:nth-child(2) { height: 17px; }.brand-mark i:nth-child(3) { height: 24px; }
+.brand-name { font: 800 17px/1 'Manrope', sans-serif; letter-spacing: -.04em; }.brand-name b { color: #c5a46b; font-weight: 600; }.brand-name small { display: block; margin-top: 5px; color: rgba(255,255,255,.5); font: 600 8px/1 'DM Sans', sans-serif; letter-spacing: .17em; }
+.footer-main > p { max-width: 260px; margin: 2px 0; color: rgba(255,255,255,.65); font: 400 15px/1.65 'Manrope', sans-serif; }
+.footer-main nav { display: grid; grid-template-columns: 1fr 1fr; gap: 15px 20px; font-size: 11px; color: rgba(255,255,255,.75); }
+.footer-main nav a:hover, .legal a:hover { color: #e2c48b; }
+.footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-top: 17px; border-top: 1px solid rgba(255,255,255,.19); color: rgba(255,255,255,.52); font-size: 9px; }
+.legal { display: flex; gap: 20px; }
+.footer-language { display: flex; align-items: center; gap: 9px; color: rgba(255,255,255,.6); font-size: 10px; letter-spacing: .12em; }
+.footer-language span { height: 10px; border-left: 1px solid currentColor; opacity: .5; }.footer-language .active { color: #fff; font-weight: 700; }.footer-language a:not(.active) { opacity: .56; }
+:where(a):focus-visible { outline: 2px solid #e2c48b; outline-offset: 4px; }
+@media (max-width: 900px) {
+  .container { width: min(100% - 56px, 760px); }
+  .footer-main { grid-template-columns: .85fr .8fr 1.2fr; gap: 20px; }
+}
+@media (max-width: 640px) {
+  .container { width: calc(100% - 40px); }
+  .site-footer { padding-top: 40px; }
+  .footer-main { grid-template-columns: 1fr 1fr; gap: 23px 15px; padding-bottom: 32px; }
+  .footer-main > p { max-width: 230px; font-size: 13px; }
+  .footer-main nav { grid-column: 1/-1; grid-template-columns: 1fr 1fr; gap: 14px 12px; font-size: 10px; }
+  .footer-bottom { display: grid; grid-template-columns: 1fr auto; gap: 14px 10px; align-items: start; font-size: 8px; }
+  .footer-bottom > span { grid-column: 1/-1; }
+  .legal { flex-wrap: wrap; gap: 11px; row-gap: 8px; }
+  .footer-language { justify-self: end; }
+}

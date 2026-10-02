@@ -1,0 +1,86 @@
+<app-site-header activeSection="project"></app-site-header>
+
+@if (isPhaseOne) {
+  <main class="project-page phase-page">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Fil d’Ariane"><a routerLink="/">Accueil</a><span aria-hidden="true">/</span><a routerLink="/projet">Le projet</a><span aria-hidden="true">/</span><span aria-current="page">Phase 1</span></nav>
+      <section class="phase-preview">
+        <p class="eyebrow"><span class="eyebrow-line"></span>Continuité du projet</p>
+        <span class="concept-note">Espace conceptuel</span>
+        <h1>Contenus de la Phase 1</h1>
+        <p>Les contenus pertinents issus de la première phase pourront être conservés et rendus accessibles depuis cette architecture. Cet aperçu illustre leur emplacement futur.</p>
+        <a class="text-link" routerLink="/projet"><span aria-hidden="true">←</span> Retour à la présentation du projet</a>
+      </section>
+    </div>
+  </main>
+} @else {
+  <main class="project-page">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Fil d’Ariane"><a routerLink="/">Accueil</a><span aria-hidden="true">/</span><span aria-current="page">Le projet</span></nav>
+
+      <section class="project-intro" aria-labelledby="project-title">
+        <p class="eyebrow"><span class="eyebrow-line"></span>Le projet</p>
+        <h1 id="project-title">MEDISAFE 2</h1>
+        <p class="intro-subtitle">Une coopération régionale pour renforcer la sécurité des médicaments.</p>
+        <div class="intro-copy">
+          <p class="intro-lead">MEDISAFE 2 est un projet régional de coopération consacré à la lutte contre les médicaments falsifiés et de qualité inférieure.</p>
+          <p>Le projet s’inscrit dans une démarche de coopération entre institutions, professionnels et acteurs régionaux afin de renforcer les capacités et les mécanismes de prévention et de lutte.</p>
+        </div>
+      </section>
+
+      <section class="figures-section" aria-labelledby="figures-title">
+        <div class="figures-intro"><p class="eyebrow"><span class="eyebrow-line"></span>Repères</p><h2 id="figures-title">MEDISAFE 2<br><em>en bref</em></h2></div>
+        <div class="figures-grid">
+          <div class="figure"><strong>13</strong><span>pays<br>concernés</span></div>
+          <div class="figure"><strong>4 <small>ans</small></strong><span>de projet</span></div>
+          <div class="figure"><strong>3</strong><span>axes<br>d’intervention</span></div>
+          <div class="figure figure-region"><span class="figure-kicker">Périmètre géographique</span><strong>Afrique</strong><span>13 pays répartis<br>dans deux espaces régionaux</span></div>
+        </div>
+      </section>
+    </div>
+
+    <section class="action-section" aria-labelledby="action-title">
+      <div class="container">
+        <div class="section-heading"><div><p class="eyebrow light"><span class="eyebrow-line"></span>Notre action</p><h2 id="action-title">Trois axes pour<br><em>agir durablement</em></h2></div><p>Une approche complémentaire qui mobilise les institutions et les professionnels tout au long de la chaîne du médicament.</p></div>
+        <div class="axis-list">
+          <a class="axis-row" href="#zones" aria-label="SO1 : Renforcer les capacités juridiques et réglementaires"><span class="axis-code">SO1</span><h3>Renforcer les capacités juridiques et réglementaires</h3><span class="axis-arrow" aria-hidden="true">↗</span></a>
+          <a class="axis-row" href="#zones" aria-label="SO2 : Renforcer les capacités des services chargés de l’application de la loi"><span class="axis-code">SO2</span><h3>Renforcer les capacités des services chargés de l’application de la loi</h3><span class="axis-arrow" aria-hidden="true">↗</span></a>
+          <a class="axis-row" href="#zones" aria-label="SO3 : Renforcer la sécurité de la chaîne d’approvisionnement et la sensibilisation"><span class="axis-code">SO3</span><h3>Renforcer la sécurité de la chaîne d’approvisionnement et la sensibilisation</h3><span class="axis-arrow" aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="zones-section" id="zones" aria-labelledby="zones-title">
+      <div class="container">
+        <div class="zones-heading"><div><p class="eyebrow"><span class="eyebrow-line"></span>Zones d’intervention</p><h2 id="zones-title">13 pays, deux espaces régionaux</h2></div><p>MEDISAFE 2 intervient dans 13 pays répartis en deux espaces régionaux.</p></div>
+        <div class="region-grid">
+          <section class="region-group" aria-labelledby="west-title"><div class="region-number">01</div><div><h3 id="west-title">Afrique de l’Ouest</h3><ul><li>Benin</li><li>Côte d’Ivoire</li><li>Ghana</li><li>Guinea</li><li>Nigeria</li><li>Senegal</li><li>Togo</li></ul></div></section>
+          <section class="region-group" aria-labelledby="other-title"><div class="region-number">02</div><div><h3 id="other-title">Afrique centrale, orientale et australe</h3><ul><li>Burundi</li><li>République démocratique du Congo</li><li>Éthiopie</li><li>Kenya</li><li>Rwanda</li><li>Zambie</li></ul></div></section>
+        </div>
+      </div>
+    </section>
+
+    <section class="partners-section" aria-labelledby="partners-title">
+      <div class="container">
+        <div class="partners-heading"><div><p class="eyebrow"><span class="eyebrow-line"></span>Coopérer</p><h2 id="partners-title">Une action fondée<br>sur la coopération</h2></div><p>Le projet s’inscrit dans une dynamique de coopération entre acteurs institutionnels, techniques et régionaux.</p></div>
+        <div class="partner-wall" aria-label="Emplacements conceptuels réservés aux identités visuelles des partenaires">
+          <div class="partner-placeholder"><span class="placeholder-mark mark-institution" aria-hidden="true"><i></i><i></i><i></i></span><strong>Partenaire institutionnel</strong></div>
+          <div class="partner-placeholder"><span class="placeholder-mark mark-technical" aria-hidden="true"><i></i></span><strong>Partenaire technique</strong></div>
+          <div class="partner-placeholder"><span class="placeholder-mark mark-regional" aria-hidden="true"><i></i><i></i><i></i><i></i></span><strong>Organisation régionale</strong></div>
+          <div class="partner-placeholder"><span class="placeholder-mark mark-institution" aria-hidden="true"><i></i><i></i><i></i></span><strong>Partenaire institutionnel</strong></div>
+        </div>
+        <p class="content-note">Emplacements conceptuels à remplacer par les identités officielles des partenaires.</p>
+      </div>
+    </section>
+
+    <section class="phase-section" aria-labelledby="phase-title">
+      <div class="container phase-inner"><div><p class="eyebrow"><span class="eyebrow-line"></span>Continuité du projet</p><h2 id="phase-title">Retrouver les contenus<br>de la Phase 1</h2></div><div class="phase-copy"><p>Les contenus pertinents issus de la première phase du projet pourront être conservés et rendus accessibles depuis cette nouvelle architecture, afin de préserver les ressources existantes tout en distinguant clairement les contenus de la Phase 2.</p><a class="text-link" routerLink="/projet/phase-1">Accéder aux contenus de la Phase 1 <span aria-hidden="true">→</span></a></div></div>
+    </section>
+
+    <section class="closing-section" aria-labelledby="closing-title">
+      <div class="container closing-inner"><div><p class="eyebrow"><span class="eyebrow-line"></span>Centre documentaire</p><h2 id="closing-title">Découvrir les ressources du projet</h2><p>Publications, cadres normatifs, ressources de formation et sites de référence.</p></div><a class="cta-link" routerLink="/ressources">Explorer les ressources <span aria-hidden="true">→</span></a></div>
+    </section>
+  </main>
+}
+
+<app-site-footer></app-site-footer>

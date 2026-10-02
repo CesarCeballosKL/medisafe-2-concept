@@ -1,0 +1,26 @@
+<header class="site-header">
+  <div class="topline">
+    <div class="container topline-inner">
+      <span>Projet régional de coopération · Afrique</span>
+      <div class="language" aria-label="Langue"><a class="active" href="#" lang="fr">FR</a><span></span><a href="#" lang="en">EN</a></div>
+    </div>
+  </div>
+  <div class="nav-wrap">
+    <div class="container nav-inner">
+      <a class="brand" href="/#accueil" aria-label="MEDISAFE 2, accueil">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand-name">MEDISAFE <b>2</b><small>COOPÉRATION RÉGIONALE</small></span>
+      </a>
+      <button class="menu-toggle" type="button" (click)="menuOpen = !menuOpen" [attr.aria-expanded]="menuOpen" aria-label="Ouvrir le menu">
+        <span></span><span></span>
+      </button>
+      <nav class="main-nav" [class.open]="menuOpen" aria-label="Navigation principale">
+        <a routerLink="/projet" (click)="closeMenu()" [class.is-current]="activeSection === 'project'" [attr.aria-current]="activeSection === 'project' ? 'page' : null">Le projet</a>
+        <a routerLink="/ressources" (click)="closeMenu()" [class.is-current]="activeSection === 'resources'" [attr.aria-current]="activeSection === 'resources' ? 'page' : null">Ressources</a>
+        <a routerLink="/actualites" (click)="closeMenu()" [class.is-current]="activeSection === 'news'" [attr.aria-current]="activeSection === 'news' ? 'page' : null">Actualités & événements</a>
+        <a href="/#contact" (click)="menuOpen = false">Nous contacter</a>
+        <div class="mobile-language"><a class="active" href="#" lang="fr">FR</a><span>·</span><a href="#" lang="en">EN</a></div>
+      </nav>
+    </div>
+  </div>
+</header>

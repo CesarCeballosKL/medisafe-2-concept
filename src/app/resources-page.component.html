@@ -1,0 +1,126 @@
+<app-site-header activeSection="resources"></app-site-header>
+
+@if (selectedResource; as resource) {
+  <main class="resources-page detail-page">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Fil d’Ariane">
+        <a routerLink="/">Accueil</a><span aria-hidden="true">/</span><a routerLink="/ressources">Ressources</a><span aria-hidden="true">/</span><span aria-current="page">{{ resource.title }}</span>
+      </nav>
+      <section class="detail-intro" aria-labelledby="detail-title">
+        <p class="eyebrow"><span class="eyebrow-line"></span>Aperçu documentaire</p>
+        <span class="concept-note">Ressource conceptuelle</span>
+        <h1 id="detail-title">{{ resource.title }}</h1>
+        <div class="detail-meta"><span>{{ resource.type }}</span><span>{{ resource.year }}</span><span>{{ resource.metadata }}</span></div>
+        <p class="detail-description">{{ resource.description }}</p>
+        <div class="document-placeholder"><span class="document-glyph" aria-hidden="true">{{ resource.type.slice(0, 1) }}</span><div><strong>Aperçu de démonstration</strong><p>Cette ressource est un contenu fictif destiné à illustrer le futur centre documentaire. Aucun fichier téléchargeable n’est associé à cet aperçu.</p></div></div>
+        <a class="back-link" routerLink="/ressources"><span aria-hidden="true">←</span> Retour au centre documentaire</a>
+      </section>
+    </div>
+  </main>
+} @else if (isUnknownResource) {
+  <main class="resources-page detail-page">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Fil d’Ariane"><a routerLink="/">Accueil</a><span aria-hidden="true">/</span><a routerLink="/ressources">Ressources</a><span aria-hidden="true">/</span><span aria-current="page">Ressource</span></nav>
+      <section class="detail-intro not-found" aria-labelledby="detail-title">
+        <p class="eyebrow"><span class="eyebrow-line"></span>Centre documentaire</p>
+        <h1 id="detail-title">Cette ressource n’est pas disponible</h1>
+        <p class="detail-description">Le lien demandé ne correspond à aucun contenu de démonstration.</p>
+        <a class="back-link" routerLink="/ressources"><span aria-hidden="true">←</span> Retour aux ressources</a>
+      </section>
+    </div>
+  </main>
+} @else {
+  <main class="resources-page">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Fil d’Ariane"><a routerLink="/">Accueil</a><span aria-hidden="true">/</span><span aria-current="page">Ressources</span></nav>
+      <section class="resources-intro" aria-labelledby="resources-title">
+        <p class="eyebrow"><span class="eyebrow-line"></span>Centre documentaire</p>
+        <h1 id="resources-title">Ressources</h1>
+        <p>Retrouvez les publications, guides, cadres normatifs, ressources de formation et sites de référence liés à MEDISAFE 2.</p>
+      </section>
+
+      <section class="search-section" aria-labelledby="search-label">
+        <label id="search-label" for="resource-search">Rechercher une ressource</label>
+        <div class="search-field">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg>
+          <input id="resource-search" type="search" placeholder="Rechercher par titre, mot-clé..." [value]="searchTerm" (input)="setSearchTerm($event)" autocomplete="off">
+        </div>
+      </section>
+
+      <section class="category-section" aria-label="Catégories de ressources">
+        <nav class="category-nav" aria-label="Filtrer par catégorie">
+          <button type="button" class="category-option all-option" [class.selected]="selectedCategory === 'all'" [attr.aria-pressed]="selectedCategory === 'all'" (click)="selectCategory('all')">
+            <span class="category-number">—</span><strong>Toutes les ressources</strong><span class="category-description">Voir le fonds documentaire</span>
+          </button>
+          @for (category of categories; track category.id) {
+            <button type="button" class="category-option" [class.selected]="selectedCategory === category.id" [attr.aria-pressed]="selectedCategory === category.id" (click)="selectCategory(category.id)">
+              <span class="category-number">{{ category.number }}</span><strong>{{ category.title }}</strong><span class="category-description">{{ category.description }}</span>
+            </button>
+          }
+        </nav>
+      </section>
+
+      <section class="filter-section" aria-labelledby="filters-title">
+        <h2 id="filters-title">Filtrer par</h2>
+        <div class="filter-controls">
+          <label>Type
+            <select [value]="selectedType" (change)="setType($event)">
+              <option value="all">Tous les types</option>
+              @for (type of types; track type) { <option [value]="type">{{ type }}</option> }
+            </select>
+          </label>
+          <label>Année
+            <select [value]="selectedYear" (change)="setYear($event)">
+              <option value="all">Toutes les années</option>
+              @for (year of years; track year) { <option [value]="year">{{ year }}</option> }
+            </select>
+          </label>
+          <label>Thématique
+            <select [value]="selectedTheme" (change)="setTheme($event)">
+              <option value="all">Toutes les thématiques</option>
+              @for (theme of themes; track theme) { <option [value]="theme">{{ theme }}</option> }
+            </select>
+          </label>
+          <button class="reset-inline" type="button" (click)="resetFilters()">Réinitialiser</button>
+        </div>
+      </section>
+
+      <section class="resource-results" aria-labelledby="results-title" aria-live="polite">
+        <div class="results-heading">
+          <div><p class="eyebrow"><span class="eyebrow-line"></span>Le fonds documentaire</p><h2 id="results-title">{{ activeCategoryTitle }}</h2><p class="results-intro">Découvrez les publications et documents de référence disponibles dans le cadre du projet.</p></div>
+          <span class="result-count">{{ filteredResources.length }} ressource{{ filteredResources.length === 1 ? '' : 's' }}</span>
+        </div>
+        @if (filteredResources.length) {
+          <div class="resource-grid">
+            @for (resource of filteredResources; track trackResource($index, resource)) {
+              <article class="resource-card">
+                <div class="document-cover" [attr.data-type]="resource.type">
+                  <span class="document-type">{{ resource.type }}</span>
+                  <span class="document-year">{{ resource.year }}</span>
+                  <span class="document-lines" aria-hidden="true"><i></i><i></i><i></i></span>
+                  <span class="document-fold" aria-hidden="true"></span>
+                </div>
+                <div class="resource-card-body">
+                  <div class="card-meta"><span>{{ resource.year }}</span><span class="concept-label">Exemple conceptuel</span></div>
+                  <h3>{{ resource.title }}</h3>
+                  <p>{{ resource.description }}</p>
+                  <div class="resource-card-bottom"><span class="file-meta">{{ resource.metadata }}</span><a [routerLink]="['/ressources', resource.id]">Consulter la ressource <span aria-hidden="true">→</span></a></div>
+                </div>
+              </article>
+            }
+          </div>
+        } @else {
+          <div class="empty-state">
+            <span class="empty-mark" aria-hidden="true">—</span>
+            <h3>Aucune ressource ne correspond à votre recherche.</h3>
+            <p>Modifiez vos critères ou réinitialisez les filtres pour afficher le fonds documentaire.</p>
+            <button class="reset-button" type="button" (click)="resetFilters()">Réinitialiser les filtres</button>
+          </div>
+        }
+        <p class="content-note">Contenus fictifs présentés à titre de démonstration.</p>
+      </section>
+    </div>
+  </main>
+}
+
+<app-site-footer></app-site-footer>
